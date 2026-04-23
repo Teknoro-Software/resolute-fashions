@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
+/* 🎨 Resolute Fashions Theme */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAFAFA;
+  --foreground: #000000;
+
+  --primary: #02499C;
+  /* deep blue */
+  --secondary: #7093BD;
+  /* soft blue */
+  --accent: #FDB0DC;
+  /* pink highlight */
+
+  --muted: #6B7280;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Prevent horizontal scroll */
+html,
 body {
-  background: var(--background);
+  overflow-x: hidden;
+}
+
+/* Base */
+body {
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Accent usage */
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Secondary sections */
+.bg-soft {
+  background-color: var(--secondary);
+}
+
+/* Text styles */
+.text-muted {
+  color: var(--muted);
 }
