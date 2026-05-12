@@ -4,8 +4,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ShoppingBag, Search, Heart } from "lucide-react";
 import Image from "next/image";
+import { useSearch } from "@/context/SearchContext";
+import { useCart } from "@/context/CartContext";
 
 export default function Navbar() {
+    const { searchTerm, setSearchTerm } = useSearch();
+    const { cart } = useCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
     return (
         <motion.header
             initial={{ y: -40, opacity: 0 }}
@@ -38,7 +44,9 @@ export default function Navbar() {
                     />
                     <input
                         type="text"
-                        placeholder="Search for products..."
+                        value={searchTerm}
+                        onChange={(event) => setSearchTerm(event.target.value)}
+                        placeholder="Search for products or categories..."
                         className="w-full pl-11 pr-4 py-2.5 rounded-full 
               bg-gray-100/80 backdrop-blur 
               text-sm outline-none 
@@ -67,9 +75,11 @@ export default function Navbar() {
                         />
 
                         {/* Cart badge */}
-                        <span className="absolute -top-2 -right-2 text-[10px] bg-[var(--primary)] text-white px-1.5 py-[1px] rounded-full">
-                            2
-                        </span>
+                        {totalItems > 0 && (
+                            <span className="absolute -top-2 -right-2 text-[10px] bg-[var(--primary)] text-white px-1.5 py-[1px] rounded-full">
+                                {totalItems}
+                            </span>
+                        )}
                     </div>
 
                 </div>
