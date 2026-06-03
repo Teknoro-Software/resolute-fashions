@@ -146,8 +146,7 @@ export default function EditProductPage() {
     };
 
     const handleImageUpload = async () => {
-        const uploadedImages: string[] =
-            [...images];
+        const uploadedImages = [...images];
 
         for (const file of newFiles) {
             const formData =
@@ -160,18 +159,27 @@ export default function EditProductPage() {
 
             const uploadRes =
                 await fetch(
-                    "/api/upload-product",
+                    "/api/upload",
                     {
-                        method: "POST",
+                        method:
+                            "POST",
                         body: formData,
                     }
                 );
+
+            if (
+                !uploadRes.ok
+            ) {
+                throw new Error(
+                    "Image upload failed"
+                );
+            }
 
             const uploadData =
                 await uploadRes.json();
 
             uploadedImages.push(
-                uploadData.path
+                uploadData.url
             );
         }
 
@@ -179,7 +187,7 @@ export default function EditProductPage() {
     };
 
 
-    
+
     const updateProduct = async (
         e: React.FormEvent
     ) => {
@@ -233,7 +241,7 @@ export default function EditProductPage() {
             );
         } finally {
             setLoading(false);
-            
+
         }
     };
 
@@ -383,8 +391,8 @@ export default function EditProductPage() {
                                         className={`px-4 py-2 rounded-xl border ${sizes.includes(
                                             size
                                         )
-                                                ? "bg-black text-white"
-                                                : ""
+                                            ? "bg-black text-white"
+                                            : ""
                                             }`}
                                     >
                                         {size}

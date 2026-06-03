@@ -127,18 +127,24 @@ export default function AddProductPage() {
 
                 const uploadRes =
                     await fetch(
-                        "/api/upload-product",
+                        "/api/upload",
                         {
                             method: "POST",
                             body: formData,
                         }
                     );
 
+                if (!uploadRes.ok) {
+                    throw new Error(
+                        "Image upload failed"
+                    );
+                }
+
                 const uploadData =
                     await uploadRes.json();
 
                 uploadedImages.push(
-                    uploadData.path
+                    uploadData.url
                 );
             }
 
@@ -156,11 +162,11 @@ export default function AddProductPage() {
                         price: Number(price),
                         category,
                         subCategory,
-                        images:
-                            uploadedImages,
+                        images: uploadedImages,
                         sizes,
-                        stock:
-                            Number(stock),
+                        stock: Number(stock),
+                        newArrival,
+                        featured,
                     }),
                 }
             );

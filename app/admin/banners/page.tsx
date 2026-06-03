@@ -48,38 +48,54 @@ export default function BannerPage() {
                 file
             );
 
-            const uploadRes = await fetch(
-                "/api/upload-banner",
-                {
-                    method: "POST",
-                    body: formData,
-                }
-            );
-
-            const uploadData =
-                await uploadRes.json();
+            const uploadRes =
+                await fetch(
+                    "/api/upload",
+                    {
+                        method: "POST",
+                        body: formData,
+                    }
+                );
 
             if (!uploadRes.ok) {
+                const errorText =
+                    await uploadRes.text();
+
+                console.error(
+                    errorText
+                );
+
                 throw new Error(
-                    uploadData.error ||
                     "Upload failed"
                 );
             }
 
-            await fetch(
-                "/api/banners",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-                    },
-                    body: JSON.stringify({
-                        image:
-                            uploadData.image,
-                    }),
-                }
-            );
+            const uploadData =
+                await uploadRes.json();
+
+            const saveRes =
+                await fetch(
+                    "/api/banners",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+                        },
+                        body: JSON.stringify(
+                            {
+                                image:
+                                    uploadData.url,
+                            }
+                        ),
+                    }
+                );
+
+            if (!saveRes.ok) {
+                throw new Error(
+                    "Failed to save banner"
+                );
+            }
 
             setFile(null);
 
@@ -89,13 +105,17 @@ export default function BannerPage() {
                 ) as HTMLInputElement;
 
             if (fileInput) {
-                fileInput.value = "";
+                fileInput.value =
+                    "";
             }
 
-            fetchBanners();
+            await fetchBanners();
         } catch (error) {
             console.error(error);
-            alert("Upload failed");
+
+            alert(
+                "Banner upload failed"
+            );
         } finally {
             setLoading(false);
         }
@@ -125,7 +145,9 @@ export default function BannerPage() {
             </h1>
 
             <form
-                onSubmit={handleSubmit}
+                onSubmit={
+                    handleSubmit
+                }
                 className="mb-8 rounded-lg border p-4"
             >
                 <input
@@ -145,7 +167,8 @@ export default function BannerPage() {
                 <button
                     type="submit"
                     disabled={
-                        loading || !file
+                        loading ||
+                        !file
                     }
                     className="mt-4 rounded bg-black px-5 py-2 text-white disabled:opacity-50"
                 >
@@ -157,7 +180,9 @@ export default function BannerPage() {
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {banners.map(
-                    (banner) => (
+                    (
+                        banner
+                    ) => (
                         <div
                             key={
                                 banner._id

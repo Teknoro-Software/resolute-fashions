@@ -92,26 +92,37 @@ export default function EditCategoryPage() {
             let imagePath = image;
 
             if (newImage) {
-                const formData = new FormData();
+                const formData =
+                    new FormData();
 
                 formData.append(
                     "file",
                     newImage
                 );
 
-                const uploadRes = await fetch(
-                    "/api/upload",
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
-                );
+                const uploadRes =
+                    await fetch(
+                        "/api/upload",
+                        {
+                            method:
+                                "POST",
+                            body: formData,
+                        }
+                    );
+
+                if (
+                    !uploadRes.ok
+                ) {
+                    throw new Error(
+                        "Image upload failed"
+                    );
+                }
 
                 const uploadData =
                     await uploadRes.json();
 
                 imagePath =
-                    uploadData.path;
+                    uploadData.url;
             }
 
             const res = await fetch(

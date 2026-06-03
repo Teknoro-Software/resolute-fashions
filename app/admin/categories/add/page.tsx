@@ -49,40 +49,60 @@ export default function AddCategoryPage() {
             let imagePath = "";
 
             if (image) {
-                const formData = new FormData();
+                const formData =
+                    new FormData();
 
-                formData.append("file", image);
-
-                const uploadRes = await fetch(
-                    "/api/upload",
-                    {
-                        method: "POST",
-                        body: formData,
-                    }
+                formData.append(
+                    "file",
+                    image
                 );
+
+                const uploadRes =
+                    await fetch(
+                        "/api/upload",
+                        {
+                            method:
+                                "POST",
+                            body: formData,
+                        }
+                    );
+
+                if (
+                    !uploadRes.ok
+                ) {
+                    throw new Error(
+                        "Image upload failed"
+                    );
+                }
 
                 const uploadData =
                     await uploadRes.json();
 
-                imagePath = uploadData.path;
+                imagePath =
+                    uploadData.url;
             }
 
-            const res = await fetch(
-                "/api/categories",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-                    },
-                    body: JSON.stringify({
-                        name,
-                        slug,
-                        image: imagePath,
-                        subCategories,
-                    }),
-                }
-            );
+            const res =
+                await fetch(
+                    "/api/categories",
+                    {
+                        method:
+                            "POST",
+                        headers: {
+                            "Content-Type":
+                                "application/json",
+                        },
+                        body: JSON.stringify(
+                            {
+                                name,
+                                slug,
+                                image:
+                                    imagePath,
+                                subCategories,
+                            }
+                        ),
+                    }
+                );
 
             if (!res.ok) {
                 throw new Error(
@@ -94,7 +114,10 @@ export default function AddCategoryPage() {
                 "/admin/categories"
             );
         } catch (error) {
-            console.error(error);
+            console.error(
+                error
+            );
+
             alert(
                 "Failed to create category"
             );
