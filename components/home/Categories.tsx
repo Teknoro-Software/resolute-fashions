@@ -1,87 +1,108 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-export default function Categories() {
-    const items = [
-        {
-            name: "Hoodies",
-            image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-        },
-        {
-            name: "Sweatshirts",
-            image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-        },
-        {
-            name: "Shirts",
-            image: "https://images.unsplash.com/photo-1593032465175-481ac7f401a0",
-        },
-        {
-            name: "T-Shirts",
-            image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d",
-        },
-        {
-            name: "Jackets",
-            image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f",
-        },
-    ];
+type CategoryItem = {
+  name: string;
+  image: string;
+  slug?: string;
+  description?: string;
+};
 
-    const [active, setActive] = useState(2); // center default
+interface CategoriesProps {
+  categories?: CategoryItem[];
+}
 
-    return (
-        <section className="h-screen w-full flex overflow-hidden">
+const fallbackCategories: CategoryItem[] = [
+  {
+    name: "Men's Wear",
+    slug: "mens-wear",
+    image: "/store/r5.jpg",
+    description:
+      "Formal Shirts, Casual Shirts, T-Shirts, Formal Pants & Baggy Jeans",
+  },
+  {
+    name: "Ladies Wear",
+    slug: "ladies-wear",
+    image: "/store/r6.jpg",
+    description:
+      "Sarees, Churidars, Co-ord Sets, Party Wear & Trendy Collections",
+  },
+];
 
-            {items.map((item, i) => {
-                const isActive = i === active;
+export default function Categories({
+  categories = fallbackCategories,
+}: CategoriesProps) {
+  const router = useRouter();
 
-                return (
-                    <motion.div
-                        key={i}
-                        onMouseEnter={() => setActive(i)}
-                        className="relative h-full cursor-pointer overflow-hidden"
+  return (
+    <section className="py-24 bg-[#fafafa']">
+      <div className="text-center mb-16">
+        <p className="uppercase tracking-[0.3em] text-gray-400 text-sm mb-3">
+          Collections
+        </p>
 
-                        /* 🔥 WIDTH CONTROL (SMOOTH) */
-                        animate={{
-                            flex: isActive ? 4 : 1,
-                        }}
+        <h2 className="text-5xl md:text-6xl font-light">
+          Explore Our Collections
+        </h2>
+      </div>
 
-                        transition={{
-                            duration: 0.6,
-                            ease: "easeInOut",
-                        }}
-                    >
+      <div className="grid md:grid-cols-2 gap-8 px-6 md:px-16">
+        {categories.map((item, index) => (
+          <motion.div
+            key={item.name}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2,
+            }}
+            onClick={() =>
+              router.push(
+                `/products?category=${item.slug ||
+                item.name.toLowerCase().replace(/\s+/g, "-")
+                }`
+              )
+            }
+            className="group relative h-[650px] rounded-[32px] overflow-hidden cursor-pointer"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="
+                absolute inset-0
+                w-full h-full
+                object-cover
+                group-hover:scale-110
+                transition duration-700
+              "
+            />
 
-                        {/* IMAGE */}
-                        <div
-                            className="absolute inset-0 bg-cover bg-center"
-                            style={{ backgroundImage: `url(${item.image})` }}
-                        />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                        {/* DARK OVERLAY */}
-                        <div className={`absolute inset-0 transition duration-500 ${isActive ? "bg-black/20" : "bg-black/50"
-                            }`} />
+            <div className="absolute bottom-10 left-10 right-10 text-white">
+              <p className="uppercase tracking-[0.3em] text-xs mb-4">
+                Collection
+              </p>
 
-                        {/* TEXT */}
-                        <motion.div
-                            className="absolute bottom-100 left-1/2 -translate-x-1/2 text-white"
+              <h3 className="text-5xl md:text-6xl font-light mb-6">
+                {item.name}
+              </h3>
 
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{
-                                opacity: isActive ? 1 : 0.6,
-                                y: isActive ? 0 : 20,
-                            }}
-                            transition={{ duration: 0.4 }}
-                        >
-                            <p className={`rotate-[-90deg] text-center tracking-[0.3em] ${isActive ? "text-xl" : "text-sm"
-                                }`}>
-                                {item.name}
-                            </p>
-                        </motion.div>
+              <p className="text-white/80 leading-7 max-w-md">
+                {item.description}
+              </p>
 
-                    </motion.div>
-                );
-            })}
-        </section>
-    );
+              <div className="mt-8 inline-flex items-center gap-3 border-b border-white pb-1">
+                <span>Explore Collection</span>
+                <span>→</span>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
 }

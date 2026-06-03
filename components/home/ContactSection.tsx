@@ -32,40 +32,74 @@ export default function ContactSection() {
                     exclusive designs and personalized service.
                 </motion.p>
 
+                
                 {/* CONTACT INFO */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.7 }}
-                    className="space-y-5 text-sm text-gray-300 mb-12"
+                    className="space-y-8 text-sm text-gray-300 mb-12"
                 >
-
                     <div>
-                        <p className="text-gray-500 text-xs mb-1">ADDRESS</p>
-                        <p>Resolute Fashions, MG Road, Kochi</p>
+                        <p className="text-gray-500 text-xs mb-2 tracking-[3px]">
+                            ADDRESS
+                        </p>
 
-                        {/* 🔥 BUTTON */}
+                        <p className="leading-7">
+                            Resolute Fashions, Opposite Second Choice
+                            <br />
+                            Near Malabar Hotel, Edapazhanji
+                            <br />
+                            Thiruvananthapuram
+                        </p>
+
                         <a
-                            href="https://www.google.com/maps/search/?api=1&query=MG+Road+Kochi"
+                            href="https://www.google.com/search?q=Resolute+Fashions+Edapazhanji+Thiruvananthapuram"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block mt-3 text-xs px-4 py-2 border border-white/20 rounded-md hover:bg-white hover:text-black transition"
+                            className="inline-block mt-4 text-xs px-4 py-2 border border-white/20 rounded-md hover:bg-white hover:text-black transition"
                         >
                             Get Directions →
                         </a>
                     </div>
 
                     <div>
-                        <p className="text-gray-500 text-xs mb-1">STORE HOURS</p>
-                        <p>Mon - Sat: 10:00 AM – 8:00 PM</p>
-                        <p>Sunday: Closed</p>
+                        <p className="text-gray-500 text-xs mb-2 tracking-[3px]">
+                            STORE HOURS
+                        </p>
+
+                        <p>
+                            Monday - Sunday
+                        </p>
+
+                        <p>
+                            10:00 AM – 9:00 PM
+                        </p>
+
+                        <p className="text-gray-500 mt-1">
+                            Sunday Closed
+                        </p>
                     </div>
 
                     <div>
-                        <p className="text-gray-500 text-xs mb-1">CONTACT</p>
-                        <p>+91 98765 43210</p>
-                    </div>
+                        <p className="text-gray-500 text-xs mb-2 tracking-[3px]">
+                            CONTACT
+                        </p>
 
+                        <a
+                            href="tel:8089081837"
+                            className="block hover:text-white transition"
+                        >
+                            +91 80890 81837
+                        </a>
+
+                        <a
+                            href="mailto:resolutefashions@gmail.com"
+                            className="block mt-2 hover:text-white transition"
+                        >
+                            resolutefashions@gmail.com
+                        </a>
+                    </div>
                 </motion.div>
 
                

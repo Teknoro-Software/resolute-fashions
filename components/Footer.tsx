@@ -35,9 +35,9 @@ export default function Footer() {
 
                     <ul className="space-y-2 text-sm text-muted">
                         <li><Link href="/">Home</Link></li>
-                        <li><Link href="/">Shop</Link></li>
-                        <li><Link href="/">New Arrivals</Link></li>
-                        <li><Link href="/">Contact</Link></li>
+                        <li><Link href="/products">Shop</Link></li>
+                        <li><Link href="/store">Our Store</Link></li>
+                        <li><Link href="/contact">Contact</Link></li>
                     </ul>
                 </div>
 
@@ -46,13 +46,16 @@ export default function Footer() {
                     <h3 className="text-sm text-muted font-medium mb-4">Contact</h3>
 
                     <p className="text-sm text-muted">
-                        Kochi, Kerala, India
+                        Resolute Fashions,
+                        Opposite Second Choice,
+                        Near Malabar Hotel,
+                        Edapazhanji, Trivandrum
                     </p>
                     <p className="text-sm text-muted mt-2">
-                        +91 98765 43210
+                        +91 8089081837
                     </p>
                     <p className="text-sm text-muted mt-2">
-                        support@resolutefashions.com
+                        resolutefashions@gmail.com
                     </p>
                 </div>
 
