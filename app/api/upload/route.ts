@@ -3,6 +3,12 @@ import cloudinary from "@/lib/cloudinary";
 
 export async function POST(request: Request) {
   try {
+
+    console.log({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET ? "EXISTS" : "MISSING",
+    });
     const formData = await request.formData();
 
     const file = formData.get("file") as File;
@@ -32,12 +38,12 @@ export async function POST(request: Request) {
       url: result.secure_url,
     });
   } catch (error) {
-    console.error(error);
+    console.error("CLOUDINARY ERROR:", error);
 
     return NextResponse.json(
       {
         success: false,
-        error: "Upload failed",
+        error: error instanceof Error ? error.message : "Upload failed",
       },
       { status: 500 },
     );
