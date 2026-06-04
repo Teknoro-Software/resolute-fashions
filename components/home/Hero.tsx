@@ -40,7 +40,7 @@ export default function Hero({
     return null;
 
   return (
-    <section className="relative w-full aspect-[16/7] overflow-hidden mt-20 md:mt-20">
+    <section className="relative w-full aspect-[16/7] overflow-hidden mt-25 md:mt-25">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
