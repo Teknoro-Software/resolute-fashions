@@ -41,21 +41,97 @@ export default function Categories({
     useState(0);
 
   return (
-    <section className="h-screen bg-black">
+    <section className="bg-[#fafafa] md:bg-black">
 
-      <div className="absolute z-20 top-12 left-1/2 -translate-x-1/2 text-center text-white">
+      {/* MOBILE */}
 
-        <p className="uppercase tracking-[0.3em] text-white/70 text-sm mb-3">
-          Collections
-        </p>
+      <div className="md:hidden px-5 py-20">
 
-        <h2 className="text-5xl md:text-7xl font-light">
-          Explore Collections
-        </h2>
+        <div className="text-center mb-10">
+
+          <p className="uppercase tracking-[0.3em] text-gray-400 text-xs mb-2">
+            Collections
+          </p>
+
+          <h2 className="text-4xl font-light">
+            Explore Collections
+          </h2>
+
+        </div>
+
+        <div className="space-y-5">
+
+          {categories.map((item) => (
+
+            <motion.div
+              key={item.name}
+              whileTap={{
+                scale: 0.98,
+              }}
+              onClick={() =>
+                router.push(
+                  `/products?category=${item.slug}`
+                )
+              }
+              className="relative h-[280px] rounded-[28px] overflow-hidden cursor-pointer"
+            >
+
+              <img
+                src={item.image}
+                alt={item.name}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+
+                <p className="uppercase tracking-[0.25em] text-xs mb-2">
+                  Collection
+                </p>
+
+                <h3 className="text-3xl font-light mb-3">
+                  {item.name}
+                </h3>
+
+                <p className="text-sm text-white/80 leading-6">
+                  {item.description}
+                </p>
+
+                <div className="mt-5 inline-flex items-center gap-2 text-sm border-b border-white pb-1">
+                  <span>
+                    Explore Collection
+                  </span>
+                  <span>
+                    →
+                  </span>
+                </div>
+
+              </div>
+
+            </motion.div>
+
+          ))}
+
+        </div>
 
       </div>
 
-      <div className="h-full flex overflow-hidden">
+      {/* DESKTOP */}
+
+      <div className="hidden md:flex h-screen overflow-hidden relative">
+
+        <div className="absolute z-20 top-12 left-1/2 -translate-x-1/2 text-center text-white">
+
+          <p className="uppercase tracking-[0.3em] text-white/70 text-sm mb-3">
+            Collections
+          </p>
+
+          <h2 className="text-5xl lg:text-7xl font-light">
+            Explore Collections
+          </h2>
+
+        </div>
 
         {categories.map(
           (item, index) => {
@@ -100,12 +176,13 @@ export default function Categories({
 
                 <div
                   className={`absolute inset-0 transition duration-500 ${isActive
-                      ? "bg-black/30"
+                      ? "bg-black/25"
                       : "bg-black/60"
                     }`}
                 />
 
                 {isActive ? (
+
                   <motion.div
                     initial={{
                       opacity: 0,
@@ -122,7 +199,7 @@ export default function Categories({
                       Collection
                     </p>
 
-                    <h3 className="text-5xl md:text-6xl font-light mb-6">
+                    <h3 className="text-5xl lg:text-6xl font-light mb-6">
                       {
                         item.name
                       }
@@ -139,20 +216,26 @@ export default function Categories({
                         Explore
                         Collection
                       </span>
+
                       <span>
                         →
                       </span>
                     </div>
 
                   </motion.div>
+
                 ) : (
+
                   <div className="absolute bottom-24 left-1/2 -translate-x-1/2">
+
                     <p className="rotate-[-90deg] whitespace-nowrap text-white tracking-[0.35em] text-lg">
                       {
                         item.name
                       }
                     </p>
+
                   </div>
+
                 )}
 
               </motion.div>
