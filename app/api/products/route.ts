@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 
-import Category from "@/lib/models/Category"; // IMPORTANT
+import "@/lib/models/Category";
 import Product from "@/lib/models/Product";
 
 export async function GET() {

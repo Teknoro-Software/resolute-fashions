@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
+import "@/lib/models/Category";
 import Product from "@/lib/models/Product";
+
 
 export async function GET(
   request: Request,
