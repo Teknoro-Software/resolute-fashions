@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function StorePage() {
     return (
@@ -233,9 +234,9 @@ export default function StorePage() {
                             discover our latest collections in person.
                         </p>
 
-                        <button className="px-10 py-4 rounded-full bg-white text-black hover:scale-105 transition">
-                            Get Directions
-                        </button>
+                        <Link href="/contact" className="px-10 py-4 rounded-full bg-white text-black hover:scale-105 transition">
+                            Contact Us
+                        </Link>
 
                     </div>
 

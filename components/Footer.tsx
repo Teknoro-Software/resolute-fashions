@@ -41,7 +41,6 @@ export default function Footer() {
                     </ul>
                 </div>
 
-                {/* 📞 RIGHT - Contact */}
                 <div>
                     <h3 className="text-sm text-muted font-medium mb-4">Contact</h3>
 
