@@ -40,7 +40,7 @@ export default function Hero({
     return null;
 
   return (
-    <section className="relative h-screen overflow-hidden">
+    <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
@@ -60,10 +60,12 @@ export default function Hero({
           }}
           className="absolute inset-0"
         >
-          <img
+          <Image
             src={banners[index].image}
             alt="Banner"
-            className="w-full h-full object-cover"
+            fill
+            className="object-contain"
+            priority
           />
 
           <div className="absolute inset-0 bg-black/20" />
