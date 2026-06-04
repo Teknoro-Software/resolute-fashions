@@ -89,8 +89,13 @@ export default function CartPage() {
     );
 
     cart.forEach((item, index) => {
+      // const imageUrl =
+      //   `${window.location.origin}${item.image}`;
+
       const imageUrl =
-        `${window.location.origin}${item.image}`;
+        item.image?.[0]?.startsWith("http")
+          ? item.image[0]
+          : `${window.location.origin}${item.image?.[0]}`;
 
       const productUrl =
         `${window.location.origin}/products/${item._id}`;
