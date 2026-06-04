@@ -60,15 +60,10 @@ export default function Hero({
           }}
           className="absolute inset-0"
         >
-          <Image
-            src={
-              banners[index]
-                .image
-            }
+          <img
+            src={banners[index].image}
             alt="Banner"
-            fill
-            priority
-            className="object-fit"
+            className="w-full h-full object-cover"
           />
 
           <div className="absolute inset-0 bg-black/20" />
