@@ -111,7 +111,9 @@ export default function ProductDetails() {
         if (!product) return;
 
         const imageUrl =
-            `${window.location.origin}${product.images?.[0] || ""}`;
+            product.images?.[0]?.startsWith("http")
+                ? product.images[0]
+                : `${window.location.origin}${product.images?.[0]}`;
 
         const productUrl =
             `${window.location.origin}/products/${product._id}`;
