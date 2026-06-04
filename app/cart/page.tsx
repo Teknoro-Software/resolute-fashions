@@ -92,10 +92,10 @@ export default function CartPage() {
       // const imageUrl =
       //   `${window.location.origin}${item.image}`;
 
-      const imageUrl =
-        item.image?.[0]?.startsWith("http")
-          ? item.image[0]
-          : `${window.location.origin}${item.image?.[0]}`;
+      // const imageUrl =
+      //   item.image?.[0]?.startsWith("http")
+      //     ? item.image[0]
+      //     : `${window.location.origin}${item.image?.[0]}`;
 
       const productUrl =
         `${window.location.origin}/products/${item._id}`;
@@ -118,9 +118,9 @@ export default function CartPage() {
 
       lines.push("");
 
-      lines.push(
-        `Image: ${imageUrl}`
-      );
+      // lines.push(
+      //   `Image: ${imageUrl}`
+      // );
 
       lines.push(
         `Product: ${productUrl}`
