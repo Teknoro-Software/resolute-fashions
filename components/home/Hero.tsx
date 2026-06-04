@@ -68,7 +68,7 @@ export default function Hero({
             alt="Banner"
             fill
             priority
-            className="object-contain"
+            className="object-fit"
           />
 
           <div className="absolute inset-0 bg-black/20" />
